@@ -50,10 +50,10 @@ class Display
   def render
     puts ""
     build_display_grid.each_with_index do |row, idx|
-      puts " #{8 - idx} #{row.join}"
+      puts " #{8 - idx}| #{row.join}"
     end
-    # puts "    ----------------------"
-    puts "    A  B  C  D  E  F  G  H"
+    puts "    ------------------------"
+    puts "     A  B  C  D  E  F  G  H"
   end
 
 
