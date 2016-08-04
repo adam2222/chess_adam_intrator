@@ -1,9 +1,9 @@
-
+# require_relative 'pieces/pawn'
 
 class Piece
 
-  def initialize(color, board, position)
-    @color, @board, @position = color, board, position
+  def initialize(color, position)
+    @color, @position = color, position
 
   end
 
