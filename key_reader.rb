@@ -1,7 +1,7 @@
 require "io/console"
 
-module key_reader
-  
+module KeyReader
+
   KEYMAP = {
     " " => :space,
     "h" => :left,

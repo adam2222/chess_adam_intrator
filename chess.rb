@@ -8,12 +8,13 @@ class Game
   attr_accessor :board, :display
 
   def run
-    input = gets.chomp
-    until input == "q"
-      
-      @display.render
-      input = gets.chomp
+    loop do
+      display.render
+      display.get_input
+
     end
+
+
   end
 
   def initialize(player1 = "Adam", player2 = "Kira")

@@ -46,13 +46,16 @@ class Board
         grid[row][idx] = King.new(color, [row, idx])
       end
     end
-    
+
     grid
   end
 
-
   def initialize(grid = Board.new_board)
     @grid = grid
+  end
+
+  def in_bounds?(new_pos)
+    new_pos.all? { |x| x.between?(0, 7) }
   end
 
   def move(from, to)
