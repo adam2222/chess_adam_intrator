@@ -1,4 +1,5 @@
-require 'colorize'
+
+require 'byebug'
 require_relative 'key_reader'
 
 class Display
@@ -60,14 +61,18 @@ class Display
 
 end
 
+class String
+  def colorize(params)
 
-#
-# 8 ♜	♞	♝	♛	♚	♝	♞	♜
-# 7	♟	♟	♟	♟	♟	♟	♟	♟
-# 6
-# 5
-# 4
-# 3
-# 2	♙	♙	♙	♙	♙	♙	♙	♙
-# 1	♖	♘	♗	♕	♔	♗	♘	♖
-#   a	b	c	d	e	f	g	h
+    case params[:background]
+    when :light_black
+      "\e[0;39;100m#{self}\e[0m"
+    when :white
+      "\e[0;39;47m#{self}\e[0m"
+    when :cyan
+      "\e[0;39;46m#{self}\e[0m"
+    when :red
+      "\e[0;39;41m#{self}\e[0m"
+    end
+  end
+end
