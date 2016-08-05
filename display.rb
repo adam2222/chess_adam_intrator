@@ -3,12 +3,12 @@ require 'byebug'
 require_relative 'key_reader'
 
 class Display
-  include Cursorable
+  include KeyReader
 
   def initialize(board)
     @board = board
     @cursor_pos = [0, 0]
-    @flatiron_cells = [
+    @flatiron_squares = [
       [5, 0],
       [4, 1],
       [3, 2],
@@ -22,6 +22,7 @@ class Display
     ]
   end
 
+  # Creates a new array for display purposes that mirrors @board.grid
   def build_display_grid
     @board.grid.map.with_index do |row, row_number|
       row.map.with_index do |element, col_number|
@@ -39,28 +40,33 @@ class Display
   def determine_color(row, column)
     if [row, column] == @cursor_pos
       { background: :red }
-    elsif @flatiron_cells.include?([row, column])
+    elsif @flatiron_squares.include?([row, column])
       { background: :cyan }
-    elsif row.odd?
-      column.odd? ? { background: :white } : { background: :light_black }
+    elsif (row + column).even?
+      { background: :white }
     else
-      column.odd? ? { background: :light_black } : { background: :white }
+      { background: :light_black }
     end
   end
 
+  # Prints out display grid to console
   def render
-    puts ""
+    system("clear")
+    puts "\n\n"
+
     build_display_grid.each_with_index do |row, idx|
-      puts " #{8 - idx}| #{row.join}"
+      puts " #{8 - idx} │ #{row.join}"
     end
-    puts "    ------------------------"
-    puts "     A  B  C  D  E  F  G  H"
+
+    puts "     ────────────────────────"
+    puts "      A  B  C  D  E  F  G  H"
   end
 
 
 
 end
 
+# Monkey-patched String class with custom 'colorize' method
 class String
   def colorize(params)
 

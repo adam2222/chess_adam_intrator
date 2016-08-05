@@ -1,6 +1,7 @@
 require "io/console"
 
-module Cursorable
+module key_reader
+  
   KEYMAP = {
     " " => :space,
     "h" => :left,
@@ -59,7 +60,8 @@ module Cursorable
       input << STDIN.read_nonblock(3) rescue nil
       input << STDIN.read_nonblock(2) rescue nil
     end
-  ensure
+
+    ensure
     STDIN.echo = true
     STDIN.cooked!
 

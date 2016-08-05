@@ -35,22 +35,18 @@ class Board
     grid[row].each_with_index do |_, idx|
       case idx
       when 0, 7
-      # if idx == 0 || idx == 7
         grid[row][idx] = Rook.new(color, [row, idx])
       when 1, 6
-      # elsif idx == 1 || idx == 6
         grid[row][idx] = Bishop.new(color, [row, idx])
       when 2, 5
-      # elsif idx == 2 || idx == 5
         grid[row][idx] = Knight.new(color, [row, idx])
       when 3
-      # elsif idx == 3
         grid[row][idx] = Queen.new(color, [row, idx])
-      # else
       when 4
         grid[row][idx] = King.new(color, [row, idx])
       end
     end
+    
     grid
   end
 
