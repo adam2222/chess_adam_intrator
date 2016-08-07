@@ -10,15 +10,40 @@ require 'byebug'
 class Board
   attr_accessor :grid
 
-  def self.new_board
-    grid = Array.new(8) { Array.new(8) }
-    Board.add_pawns(grid, 1)
-    Board.add_pawns(grid, 6)
-    Board.add_first_row(grid, 0)
-    Board.add_first_row(grid, 7)
+  def initialize(grid = new_board)
+    @grid = grid
   end
 
-  def self.add_pawns(grid, row)
+  def in_bounds?(new_pos)
+    new_pos.all? { |x| x.between?(0, 7) }
+  end
+
+  def make_move(from, to)
+    piece = self[from[0], from[1]]
+    self[to[0], to[1]] = piece
+    self[from[0], from[1]] = nil
+  end
+
+  def [](row, column)
+    @grid[row][column]
+  end
+
+  def []=(row, column, content)
+    @grid[row][column] = content
+  end
+
+
+  private
+
+  def new_board
+    grid = Array.new(8) { Array.new(8) }
+    add_pawns(grid, 1)
+    add_pawns(grid, 6)
+    add_first_row(grid, 0)
+    add_first_row(grid, 7)
+  end
+
+  def add_pawns(grid, row)
     row == 1? color = :black : color = :white
 
     grid[row].each_with_index do |_, idx|
@@ -29,7 +54,7 @@ class Board
     grid
   end
 
-  def self.add_first_row(grid, row)
+  def add_first_row(grid, row)
     row == 0 ? color = :black : color = :white
 
     grid[row].each_with_index do |_, idx|
@@ -49,29 +74,5 @@ class Board
 
     grid
   end
-
-  def initialize(grid = Board.new_board)
-    @grid = grid
-  end
-
-  def in_bounds?(new_pos)
-    new_pos.all? { |x| x.between?(0, 7) }
-  end
-
-  def move(from, to)
-    # @grid[from] = nil
-    # @grid[to] = piece
-  end
-
-  def [](row, column)
-    @grid[row][column]
-  end
-
-  def []=(row, column, content)
-    @grid[row][column] = content
-  end
-
-  private
-
 
 end

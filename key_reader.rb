@@ -32,6 +32,7 @@ module KeyReader
     down: [1, 0]
   }
 
+  #
   def get_input
     key = KEYMAP[read_char]
     handle_key(key)
@@ -42,6 +43,7 @@ module KeyReader
     when :ctrl_c
       exit 0
     when :return, :space
+      @cursor_selected = true 
       @cursor_pos
     when :left, :right, :up, :down
       update_pos(MOVES[key])

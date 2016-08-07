@@ -5,9 +5,12 @@ require_relative 'key_reader'
 class Display
   include KeyReader
 
+  attr_reader :board
+
   def initialize(board)
     @board = board
     @cursor_pos = [0, 0]
+    @cursor_selected = false
     @flatiron_squares = [
       [5, 0],
       [4, 1],
@@ -22,7 +25,7 @@ class Display
     ]
   end
 
-  # Creates a new array for display purposes that mirrors @board.grid
+  # Creates a new array: printable (displayable) version of @board.grid
   def build_display_grid
     @board.grid.map.with_index do |row, row_number|
       row.map.with_index do |element, col_number|
@@ -37,9 +40,13 @@ class Display
     end
   end
 
+
   def determine_color(row, column)
-    if [row, column] == @cursor_pos
+    if [row, column] == @cursor_pos && @cursor_selected == true
+      { background: :purple }
+    elsif [row, column] == @cursor_pos
       { background: :red }
+    # elsif @
     elsif @flatiron_squares.include?([row, column])
       { background: :cyan }
     elsif (row + column).even?
@@ -79,6 +86,9 @@ class String
       "\e[0;39;46m#{self}\e[0m"
     when :red
       "\e[0;39;41m#{self}\e[0m"
+    when :purple
+      "\e[48;5;129m#{self}\e[0m"
     end
+
   end
 end
