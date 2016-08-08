@@ -5,12 +5,12 @@ require_relative 'key_reader'
 class Display
   include KeyReader
 
-  attr_reader :board
+  attr_accessor :board, :selected_square
 
   def initialize(board)
     @board = board
     @cursor_pos = [0, 0]
-    @cursor_selected = false
+    @selected_square = nil
     @flatiron_squares = [
       [5, 0],
       [4, 1],
@@ -42,7 +42,7 @@ class Display
 
 
   def determine_color(row, column)
-    if [row, column] == @cursor_pos && @cursor_selected == true
+    if [row, column] == @selected_square
       { background: :purple }
     elsif [row, column] == @cursor_pos
       { background: :red }
@@ -76,19 +76,23 @@ end
 # Monkey-patched String class with custom 'colorize' method
 class String
   def colorize(params)
+    string = self
 
-    case params[:background]
-    when :light_black
+    if params[:background] == :light_black
       "\e[0;39;100m#{self}\e[0m"
-    when :white
+    elsif params[:background] == :white
       "\e[0;39;47m#{self}\e[0m"
-    when :cyan
+    elsif params[:background] == :cyan && params[:style] == :bold
+      "\e[1;39;46m#{self}\e[0m"
+    elsif params[:background] == :cyan
       "\e[0;39;46m#{self}\e[0m"
-    when :red
+    elsif params[:background] == :red
       "\e[0;39;41m#{self}\e[0m"
-    when :purple
+    elsif params[:background] == :purple
       "\e[48;5;129m#{self}\e[0m"
     end
+
+
 
   end
 end

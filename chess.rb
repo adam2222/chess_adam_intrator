@@ -8,7 +8,7 @@ require 'byebug'
 class Game
   attr_accessor :board, :display
 
-  def initialize(player1 = "White", player2 = "Black")
+  def initialize(player1 = "Adam", player2 = "Flatiron")
     @board = Board.new
     @display = Display.new(@board)
     @players = {
@@ -23,8 +23,8 @@ class Game
     loop do
       display.render
       from, to = @players[@current_player].select_move
-      @board.make_move(from, to)
-
+      board.make_move(from, to)
+      switch_players
     end
   end
 
