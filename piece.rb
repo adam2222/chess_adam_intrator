@@ -8,9 +8,15 @@ class Piece
 
   end
 
+  def moves
+    
+  end
+
   def valid_move?
 
   end
+
+
 
   def name
     "#{self.class}".downcase

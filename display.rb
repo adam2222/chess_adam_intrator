@@ -5,7 +5,7 @@ require_relative 'key_reader'
 class Display
   include KeyReader
 
-  attr_accessor :board, :selected_square
+  attr_accessor :board, :selected_square, :notifications
 
   def initialize(board)
     @board = board
@@ -23,6 +23,7 @@ class Display
       [2, 5],
       [1, 6]
     ]
+    @notifications = {player: nil, instructions: nil, errors: nil}
   end
 
   # Creates a new array: printable (displayable) version of @board.grid
@@ -43,9 +44,9 @@ class Display
 
   def determine_color(row, column)
     if [row, column] == @selected_square
-      { background: :purple }
-    elsif [row, column] == @cursor_pos
       { background: :red }
+    elsif [row, column] == @cursor_pos
+      { background: :purple }
     # elsif @
     elsif @flatiron_squares.include?([row, column])
       { background: :cyan }
@@ -67,11 +68,25 @@ class Display
 
     puts "     ────────────────────────"
     puts "      A  B  C  D  E  F  G  H"
+    puts ""
+    puts "    " + notifications[:player].colorize({style: :bold, background: :cyan})
+
+    if notifications[:instructions]
+      puts "    " + notifications[:instructions].colorize({background: :cyan})
+    end
+
+    if notifications[:errors]
+      puts "    " + notifications[:errors].colorize({background: :purple})
+    end
   end
 
-
+  def reset_notfications
+    notifications[:instructions] = nil
+    notifications[:errors] = nil
+  end
 
 end
+
 
 # Monkey-patched String class with custom 'colorize' method
 class String

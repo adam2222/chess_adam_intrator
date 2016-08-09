@@ -6,4 +6,6 @@ class Bishop < Piece
     self.color == :black ? " ♝ " : " ♗ "
   end
 
+  
+
 end

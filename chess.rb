@@ -21,13 +21,25 @@ class Game
   def run
     # until board.checkmate?
     loop do
+      notifications[:player] = " #{player.name} (#{player.color}): "
+      notifications[:instructions] = " Which piece would you like to move? "
       display.render
-      from, to = @players[@current_player].select_move
+
+      from, to = player.select_move
+      # if board[to[0],to[1]].nil?
+      #   raise "please choose an "
       board.make_move(from, to)
       switch_players
     end
   end
 
+  def notifications
+    display.notifications
+  end
+
+  def player
+    @players[@current_player]
+  end
   private
 
   def switch_players
