@@ -34,8 +34,11 @@ class Board
     @grid[row][column] = content
   end
 
-  def check_for_check
+  def in_check?(color)
     # self.dup
+  end
+
+  def checkmate?(color)
 
   end
 
@@ -53,7 +56,7 @@ class Board
     row == 1? color = :black : color = :white
 
     grid[row].each_with_index do |_, idx|
-      pawn = Pawn.new(color, [row, idx])
+      pawn = Pawn.new(color, [row, idx], self)
       grid[row][idx] = pawn
     end
 
@@ -66,15 +69,15 @@ class Board
     grid[row].each_with_index do |_, idx|
       case idx
       when 0, 7
-        grid[row][idx] = Rook.new(color, [row, idx])
+        grid[row][idx] = Rook.new(color, [row, idx], self)
       when 1, 6
-        grid[row][idx] = Bishop.new(color, [row, idx])
+        grid[row][idx] = Bishop.new(color, [row, idx], self)
       when 2, 5
-        grid[row][idx] = Knight.new(color, [row, idx])
+        grid[row][idx] = Knight.new(color, [row, idx], self)
       when 3
-        grid[row][idx] = Queen.new(color, [row, idx])
+        grid[row][idx] = Queen.new(color, [row, idx], self)
       when 4
-        grid[row][idx] = King.new(color, [row, idx])
+        grid[row][idx] = King.new(color, [row, idx], self)
       end
     end
 

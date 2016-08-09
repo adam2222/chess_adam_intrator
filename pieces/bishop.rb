@@ -1,4 +1,5 @@
 require_relative '../piece'
+require_relative 'sliding'
 
 class Bishop < Piece
   include Sliding
@@ -7,16 +8,8 @@ class Bishop < Piece
     self.color == :black ? " ♝ " : " ♗ "
   end
 
-  def diagonal
-    [
-      [-1, -1],
-      [1, 1],
-      [1, -1],
-      [-1, 1]
-    ]
+  def directions
+    DIAGONAL
   end
-
-  def moves(current_pos)
-
-  end
+  
 end

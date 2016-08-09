@@ -31,15 +31,15 @@ class Game
         display.render
 
         from, to = player.select_move
+        
+        board.make_move(from, to) if board[from].valid_move?(to)
+
       rescue StandardError => e
         display.reset_notfications
         notifications[:errors] = e.message
         retry
       end
 
-      # if valid_move?(from, to)
-        board.make_move(from, to)
-      # end
       switch_players
     end
   end
