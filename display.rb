@@ -80,6 +80,19 @@ class Display
     end
   end
 
+  def welcome_screen
+    system("clear")
+    puts "\n\n"
+
+    puts "    " + " Chess!                      ".colorize(background: :cyan, style: :bold) + " ".colorize(background: :light_cyan) + " ".colorize(background: :cyan) + " ".colorize(background: :light_cyan) + "    ".colorize(background: :cyan)
+
+    puts "    " + " by Adam Intrator, Flatiron ".colorize(background: :cyan) + "h".colorize(background: :light_cyan) + "o".colorize(background: :cyan) + "p".colorize(background: :light_cyan) + "eful ".colorize(background: :cyan)
+
+    puts "    " + "                           ".colorize(background: :cyan) + " ".colorize(background: :light_cyan) + " ".colorize(background: :cyan) + " ".colorize(background: :light_cyan) +  "      ".colorize(background: :cyan)
+
+    puts "    " + " Press return to begin    ".colorize(background: :cyan) + " ".colorize(background: :light_cyan) + " ".colorize(background: :cyan) + " ".colorize(background: :light_cyan) + "       ".colorize(background: :cyan)
+  end
+
   def reset_notfications
     notifications[:instructions] = nil
     notifications[:errors] = nil
@@ -91,7 +104,6 @@ end
 # Monkey-patched String class with custom 'colorize' method
 class String
   def colorize(params)
-    string = self
 
     if params[:background] == :light_black
       "\e[0;39;100m#{self}\e[0m"
@@ -101,13 +113,13 @@ class String
       "\e[1;39;46m#{self}\e[0m"
     elsif params[:background] == :cyan
       "\e[0;39;46m#{self}\e[0m"
+    elsif params[:background] == :light_cyan
+      "\e[0;39;48;5;123m#{self}\e[0m"
     elsif params[:background] == :red
       "\e[0;39;41m#{self}\e[0m"
     elsif params[:background] == :purple
       "\e[48;5;129m#{self}\e[0m"
     end
-
-
 
   end
 end

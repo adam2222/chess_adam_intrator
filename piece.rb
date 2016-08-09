@@ -9,11 +9,11 @@ class Piece
   end
 
   def moves
-    
+
   end
 
-  def valid_move?
-
+  def valid_move?(from, to)
+    moves.include?(to)
   end
 
 

@@ -19,16 +19,27 @@ class Game
   end
 
   def run
+
+    until display.read_char == "\r"
+      display.welcome_screen
+    end
     # until board.checkmate?
     loop do
-      notifications[:player] = " #{player.name} (#{player.color}): "
-      notifications[:instructions] = " Which piece would you like to move? "
-      display.render
+      begin
+        notifications[:player] = " #{player.name} (#{player.color}): "
+        notifications[:instructions] = " Which piece would you like to move? "
+        display.render
 
-      from, to = player.select_move
-      # if board[to[0],to[1]].nil?
-      #   raise "please choose an "
-      board.make_move(from, to)
+        from, to = player.select_move
+      rescue StandardError => e
+        display.reset_notfications
+        notifications[:errors] = e.message
+        retry
+      end
+
+      # if valid_move?(from, to)
+        board.make_move(from, to)
+      # end
       switch_players
     end
   end
@@ -53,6 +64,15 @@ class Game
 
 end
 
+##################################
 
-game = Game.new
-game.run
+if __FILE__ == $PROGRAM_NAME
+
+  if ARGV[0] && ARGV[1]
+    game = Game.new(ARGV[0], ARGV[1])
+  else
+    game = Game.new
+  end
+
+  game.run
+end
