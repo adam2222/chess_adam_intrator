@@ -5,5 +5,5 @@ module Sliding
 
   end
 
-  
+
 end

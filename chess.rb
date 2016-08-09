@@ -20,8 +20,8 @@ class Game
 
   def run
 
+    display.welcome_screen
     until display.read_char == "\r"
-      display.welcome_screen
     end
     # until board.checkmate?
     loop do

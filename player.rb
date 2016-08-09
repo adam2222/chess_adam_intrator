@@ -26,7 +26,7 @@ class Player
       else
         display.render
         from = select_pos
-        
+
         until selected_piece(from) && selected_piece(from).color == self.color
             display.reset_notfications
             raise " Please select a #{self.color} piece "
@@ -55,7 +55,7 @@ class Player
   end
 
   def selected_piece(pos)
-    display.board[pos[0], pos[1]]
+    display.board[pos]
   end
 
 end

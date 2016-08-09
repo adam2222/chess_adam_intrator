@@ -1,10 +1,10 @@
 # require_relative 'pieces/pawn'
 
 class Piece
-  attr_accessor :color, :position
+  attr_accessor :color, :position, :board
 
   def initialize(color, position)
-    @color, @position = color, position
+    @color, @position, @board = color, position, board
 
   end
 
@@ -13,8 +13,17 @@ class Piece
   end
 
   def valid_move?(from, to)
-    moves.include?(to)
+    if self.moves.include?(to)
+      if board[to].empty? || !board[to].color == self.color
+        return true
+      else
+        raise "You cannot attack your own piece"
+      end
+    end
+
+    raise "Invalid move"
   end
+
 
 
 

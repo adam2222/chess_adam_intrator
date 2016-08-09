@@ -19,19 +19,25 @@ class Board
   end
 
   def make_move(from, to)
-    piece = self[from[0], from[1]]
-    self[to[0], to[1]] = piece
-    self[from[0], from[1]] = nil
+    piece = self[from]
+    self[to] = piece
+    self[from] = nil
   end
 
-  def [](row, column)
+  def [](position)
+    row, column = position
     @grid[row][column]
   end
 
-  def []=(row, column, content)
+  def []=(position, content)
+    row, column = position
     @grid[row][column] = content
   end
 
+  def check_for_check
+    # self.dup
+
+  end
 
   private
 
