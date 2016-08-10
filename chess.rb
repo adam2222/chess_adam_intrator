@@ -26,7 +26,8 @@ class Game
     until board.checkmate?(@current_player)
       begin
         notifications[:player] = " #{player.name} (#{player.color}): "
-        notifications[:instructions] = " Which piece would you like to move? "
+        # notifications[:instructions] = " Which piece would you like to move? "
+        notifications[:instructions] = board.find_king(@current_player).valid_moves.to_s
         notifications[:alerts] = " Check! " if board.in_check?(@current_player)
         display.render
 

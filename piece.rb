@@ -23,7 +23,6 @@ class Piece
 
 
   def valid_move?(to)
-    
     return true if valid_moves.include?(to)
 
     raise " Invalid move "
@@ -42,7 +41,7 @@ class Piece
       equivalent_piece = duped_board[@position]
 
       equivalent_piece.position = move
-      board.in_check?(@color)
+      duped_board.in_check?(@color)
     end
 
   end
