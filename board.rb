@@ -21,6 +21,7 @@ class Board
   def make_move(from, to)
     piece = self[from]
     self[to] = piece
+    piece.position = to
     self[from] = nil
   end
 
@@ -34,14 +35,49 @@ class Board
     @grid[row][column] = content
   end
 
-  def in_check?(color)
-    # self.dup
-  end
-
   def checkmate?(color)
-
+    # in_check? && king.moves.nil?
   end
 
+  def in_check?(color)
+    king_position = find_king_position(color)
+    color == :white ? opposing_color = :black : opposing_color = :white
+    any_pieces_check?(opposing_color, king_position)
+  end
+
+
+  def find_king_position(color)
+    grid.each do |row|
+      row.each do |piece|
+        if piece.nil?
+          next
+        elsif piece.class == King && piece.color == color
+          return piece.position
+        end
+      end
+    end
+  end
+
+  def any_pieces_check?(opposing_color, king_position)
+    grid.each do |row|
+      row.each do |piece|
+        if piece.nil?
+          next
+        elsif piece.color == opposing_color
+          return true if piece.moves.include?(king_position)
+        end
+      end
+    end
+    false
+  end
+
+  def dup
+    grid.map do |row|
+      row.map do |piece|
+        piece.dup
+      end
+    end
+  end
   private
 
   def new_board

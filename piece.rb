@@ -34,15 +34,15 @@ class Piece
 
   def valid_moves
     moves
-    # moves.reject do |pos|
-    #   piece = board[pos]
+    # moves.reject do |move|
+    #   duped_board = board.dup
     #
-    #   # if piece.nil?
-    #   #   in_check?(pos)
-    #   # else
-    #   #   piece.color == self.color
-    #   # end
+    #   equivalent_piece = duped_board[@position]
+    #
+    #   equivalent_piece.position = move
+    #   board.in_check?(@color)
     # end
+
   end
 
 

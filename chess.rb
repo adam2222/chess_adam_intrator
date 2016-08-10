@@ -28,10 +28,11 @@ class Game
       begin
         notifications[:player] = " #{player.name} (#{player.color}): "
         notifications[:instructions] = " Which piece would you like to move? "
+        notifications[:errors] = " Check! " if board.in_check?(@current_player)
         display.render
 
         from, to = player.select_move
-        
+
         board.make_move(from, to) if board[from].valid_move?(to)
 
       rescue StandardError => e

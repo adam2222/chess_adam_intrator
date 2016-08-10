@@ -9,9 +9,12 @@ module Stepping
 
     directions.each do |direction|
       step_y, step_x = direction
-      move_array << [curr_y + step_y, curr_x + step_x]
-    end
+      move = [curr_y + step_y, curr_x + step_x]
 
+      if board.in_bounds?(move) && (board[move].nil? || !(board[move].color == self.color))
+        move_array << move
+      end
+    end
 
     move_array
   end

@@ -3,12 +3,11 @@ module Sliding
   # All possible moves for the piece on an empty board
   def moves
     move_array = []
-    current_pos = self.position
 
     directions.each do |direction|
+      curr_y, curr_x = self.position
       step_y, step_x = direction
 
-      curr_y, curr_x = current_pos
       current_pos = [curr_y + step_y, curr_x + step_x]
 
       while in_bounds?(current_pos)
@@ -20,10 +19,11 @@ module Sliding
           move_array << current_pos
           break
         else
-          raise "Cannot attack piece of the same color"
+          break
         end
       end
     end
+
     move_array
   end
 
