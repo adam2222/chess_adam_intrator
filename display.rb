@@ -69,14 +69,21 @@ class Display
     puts "     ────────────────────────"
     puts "      A  B  C  D  E  F  G  H"
     puts ""
-    puts "    " + notifications[:player].colorize({style: :bold, background: :cyan})
+
+    if notifications[:player]
+      puts "    " + notifications[:player].colorize({style: :bold, background: :cyan})
+    end
 
     if notifications[:instructions]
       puts "    " + notifications[:instructions].colorize({background: :cyan})
     end
 
-    if notifications[:errors]
-      puts "    " + notifications[:errors].colorize({background: :purple})
+    if notifications[:alerts]
+      puts "    " + notifications[:alerts].colorize({background: :purple})
+    end
+
+    if notifications[:winner]
+      puts "    " + notifications[:winner].colorize({foreground: :cyan, style: :bold})
     end
   end
 
@@ -95,7 +102,7 @@ class Display
 
   def reset_notfications
     notifications[:instructions] = nil
-    notifications[:errors] = nil
+    notifications[:alerts] = nil
   end
 
 end
@@ -119,6 +126,8 @@ class String
       "\e[0;39;41m#{self}\e[0m"
     elsif params[:background] == :purple
       "\e[48;5;129m#{self}\e[0m"
+    elsif params[:foreground] == :cyan && params[:style] == :bold
+      "\e[1;36m#{self}\e[0m"
     end
 
   end

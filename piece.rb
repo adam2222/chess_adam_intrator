@@ -23,7 +23,9 @@ class Piece
 
 
   def valid_move?(to)
+    
     return true if valid_moves.include?(to)
+
     raise " Invalid move "
     # if self.board[to].color == self.color
     #     raise " You cannot attack your own piece "
@@ -32,16 +34,16 @@ class Piece
     # end
   end
 
+  # Filters out moves that would put player in check
   def valid_moves
-    moves
-    # moves.reject do |move|
-    #   duped_board = board.dup
-    #
-    #   equivalent_piece = duped_board[@position]
-    #
-    #   equivalent_piece.position = move
-    #   board.in_check?(@color)
-    # end
+    moves.reject do |move|
+      duped_board = board.dup
+
+      equivalent_piece = duped_board[@position]
+
+      equivalent_piece.position = move
+      board.in_check?(@color)
+    end
 
   end
 

@@ -36,23 +36,23 @@ class Board
   end
 
   def checkmate?(color)
-    # in_check? && king.moves.nil?
+    in_check?(color) && find_king(color).valid_moves.empty?
   end
 
   def in_check?(color)
-    king_position = find_king_position(color)
+    king_position = find_king(color).position
     color == :white ? opposing_color = :black : opposing_color = :white
     any_pieces_check?(opposing_color, king_position)
   end
 
 
-  def find_king_position(color)
+  def find_king(color)
     grid.each do |row|
       row.each do |piece|
         if piece.nil?
           next
         elsif piece.class == King && piece.color == color
-          return piece.position
+          return piece
         end
       end
     end
@@ -72,11 +72,16 @@ class Board
   end
 
   def dup
-    grid.map do |row|
-      row.map do |piece|
-        piece.dup
+    dup_grid = Array.new(8) { Array.new(8) }
+    dup_board = Board.new(dup_grid)
+
+    grid.each_with_index do |row, y|
+      row.each_with_index do |piece, x|
+        next if piece.nil?
+        dup_board[[y, x]] = piece.class.new(piece.color, piece.position, dup_board)
       end
     end
+    dup_board
   end
   private
 

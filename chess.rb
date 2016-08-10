@@ -19,30 +19,34 @@ class Game
   end
 
   def run
-
     display.welcome_screen
     until display.read_char == "\r"
     end
-    # until board.checkmate?
-    loop do
+
+    until board.checkmate?(@current_player)
       begin
         notifications[:player] = " #{player.name} (#{player.color}): "
         notifications[:instructions] = " Which piece would you like to move? "
-        notifications[:errors] = " Check! " if board.in_check?(@current_player)
+        notifications[:alerts] = " Check! " if board.in_check?(@current_player)
         display.render
 
         from, to = player.select_move
 
         board.make_move(from, to) if board[from].valid_move?(to)
-
       rescue StandardError => e
         display.reset_notfications
-        notifications[:errors] = e.message
+        notifications[:alerts] = e.message
         retry
       end
-
       switch_players
     end
+
+    display.notifications = {}
+    winner = (@current_player = :white ? :black : :white)
+    notifications[:winner] = "Checkmate! #{@players[winner].name} wins."
+    display.render
+    puts "\n\n"
+    sleep(2)
   end
 
   def notifications
