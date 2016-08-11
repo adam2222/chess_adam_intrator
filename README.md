@@ -5,6 +5,9 @@ Adam M. Intrator
 
 8/10/16
 
+***
+
+
  To play against the computer using default player names, load the 'chess.rb' file on the command line:
 
   `ruby chess.rb`
