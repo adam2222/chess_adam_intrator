@@ -98,7 +98,7 @@ class Game
   def winner_notification
     display.notifications = {}
     winner = (@current_player = :white ? :black : :white)
-    notifications[:winner] = "Checkmate! #{@players[winner].name} wins."
+    notifications[:winner] = "  Checkmate! #{@players[winner].name} wins."
     display.render
     puts "\n\n"
     sleep(2)
