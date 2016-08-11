@@ -1,3 +1,4 @@
+# Code for keyboard input/cursor borrowed from a 3rd party.
 require "io/console"
 
 module KeyReader

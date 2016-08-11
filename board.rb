@@ -82,6 +82,15 @@ class Board
     end
     dup_board
   end
+
+  def calc_row(row)
+    8 - row
+  end
+
+  def calc_col(col)
+    (65 + col).chr
+  end
+
   private
 
   def new_board

@@ -1,5 +1,4 @@
 require_relative 'display'
-require 'byebug'
 
 class Player
   attr_reader :name, :color, :display
@@ -14,6 +13,7 @@ class Player
 
     # display#get_input returns selected cursor position (or nil)
     until from && to
+
       # If "from" position has already been selected (not nil):
       if from
         display.reset_notfications
@@ -22,6 +22,7 @@ class Player
         notifications[:instructions] = " Where would you like to move your #{selected.name}? "
         display.render
         to = select_pos
+        display.render
       # If neither "from" or "to" positions have been selected
       else
         display.render

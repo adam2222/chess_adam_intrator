@@ -1,5 +1,4 @@
 
-require 'byebug'
 require_relative 'key_reader'
 
 class Display
