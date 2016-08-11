@@ -30,11 +30,10 @@ class Display
   def build_display_grid
     @board.grid.map.with_index do |row, row_number|
       row.map.with_index do |element, col_number|
+        params = determine_color(row_number, col_number)
         if element.nil?
-          params = determine_color(row_number, col_number)
           "   ".colorize(params)
         else
-          params = determine_color(row_number, col_number)
           element.to_s.colorize(params)
         end
       end
@@ -47,7 +46,6 @@ class Display
       { background: :red }
     elsif [row, column] == @cursor_pos
       { background: :purple }
-    # elsif @
     elsif @flatiron_squares.include?([row, column])
       { background: :cyan }
     elsif (row + column).even?
