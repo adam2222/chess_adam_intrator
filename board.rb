@@ -120,9 +120,9 @@ class Board
       when 0, 7
         grid[row][idx] = Rook.new(color, [row, idx], self)
       when 1, 6
-        grid[row][idx] = Bishop.new(color, [row, idx], self)
-      when 2, 5
         grid[row][idx] = Knight.new(color, [row, idx], self)
+      when 2, 5
+        grid[row][idx] = Bishop.new(color, [row, idx], self)
       when 3
         grid[row][idx] = Queen.new(color, [row, idx], self)
       when 4
