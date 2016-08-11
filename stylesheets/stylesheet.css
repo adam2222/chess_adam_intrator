@@ -642,7 +642,7 @@ form {
   text-indent: 4px;
 }
 #main-content h2:before {
-  padding-right: 0.3em;
+  padding-right: 0.5em;
   margin-left: -1.5em;
   content: "//";
   color: #9ddcff;
@@ -675,7 +675,7 @@ form {
 }
 
 h4:before {
-  padding-right: 0.3em;
+  padding-right: 0.5em;
   margin-left: -2.8em;
   content: "////";
   color: #9ddcff;
