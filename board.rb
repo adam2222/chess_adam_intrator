@@ -34,7 +34,8 @@ class Board
   end
 
   def checkmate?(color)
-    in_check?(color) && find_king(color).valid_moves.empty?
+    pieces = select_pieces(color)
+    in_check?(color) && pieces.all? { |piece| piece.valid_moves.empty? }
   end
 
   def in_check?(color)
@@ -130,6 +131,21 @@ class Board
     end
 
     grid
+  end
+
+  def select_pieces(color)
+    pieces = []
+
+    grid.each do |row|
+      row.each do |piece|
+        if piece.nil?
+          next
+        elsif piece.color == color
+          pieces  << piece
+        end
+      end
+    end
+    pieces
   end
 
 end
