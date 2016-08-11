@@ -1,6 +1,6 @@
 {
   "name": "Chess!",
   "tagline": "Adam M. Intrator",
-  "body": "8/10/16\r\n\r\n\r\n## Instructions\r\n\r\n---\r\n\r\n\r\nTo play against the computer using default player names, load the 'chess.rb' file on the command line:\r\n\r\n```\r\nruby chess.rb\r\n```\r\n\r\nTo play against the computer with a name of your choice, add your name and the word \"Computer\" or \"computer\" as arguments on the command line before loading the file:\r\n\r\n```\r\nruby chess.rb player_name computer\r\n```\r\n\r\nTo play against a friend, add both names as arguments on the command line:\r\n\r\n  ```\r\nruby chess.rb Player1 Player2\r\n```\r\n\r\nUse arrows to move the cursor, 'return' to select a square or piece.\r\n\r\n### Good luck!\r\n",
+  "body": "8/10/16\r\n\r\n\r\n##   Instructions\r\n\r\n---\r\n\r\n\r\nTo play against the computer using default player names, load the 'chess.rb' file on the command line:\r\n\r\n```\r\nruby chess.rb\r\n```\r\n\r\nTo play against the computer with a name of your choice, add your name and the word \"Computer\" or \"computer\" as arguments on the command line before loading the file:\r\n\r\n```\r\nruby chess.rb player_name computer\r\n```\r\n\r\nTo play against a friend, add both names as arguments on the command line:\r\n\r\n  ```\r\nruby chess.rb Player1 Player2\r\n```\r\n\r\nUse arrows to move the cursor, 'return' to select a square or piece.\r\n\r\n###    Good luck!\r\n",
   "note": "Don't delete this file! It's used internally to help with page regeneration."
 }
