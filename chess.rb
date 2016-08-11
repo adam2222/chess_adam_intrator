@@ -2,8 +2,6 @@
 require_relative 'board'
 require_relative 'display'
 require_relative 'player'
-require 'byebug'
-
 
 class Game
   attr_accessor :board, :display
@@ -21,24 +19,25 @@ class Game
   def run
     display.welcome_screen
     until display.read_char == "\r"
+      sleep
     end
 
     until board.checkmate?(@current_player)
       begin
         notifications[:player] = " #{player.name} (#{player.color}): "
-        # notifications[:instructions] = " Which piece would you like to move? "
-        notifications[:instructions] = board.find_king(@current_player).valid_moves.to_s
+        notifications[:instructions] = " Which piece would you like to move? "
         notifications[:alerts] = " Check! " if board.in_check?(@current_player)
-        display.render
 
         from, to = player.select_move
 
         board.make_move(from, to) if board[from].valid_move?(to)
+
       rescue StandardError => e
         display.reset_notfications
         notifications[:alerts] = e.message
         retry
       end
+
       switch_players
     end
 

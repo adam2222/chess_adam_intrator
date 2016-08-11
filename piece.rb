@@ -1,5 +1,3 @@
-# require_relative 'pieces/pawn'
-
 
 class Piece
   attr_accessor :color, :position, :board
@@ -18,37 +16,43 @@ class Piece
   end
 
   def moves
-    # implemented by subclass
+    # implemented by subclasses/modules
   end
 
 
   def valid_move?(to)
-    return true if valid_moves.include?(to)
+    all = moves
+    valid = valid_moves
 
-    raise " Invalid move "
-    # if self.board[to].color == self.color
-    #     raise " You cannot attack your own piece "
-    # elsif in_check?(pos)
-    #     raise " Invalid: this move puts you in check. "
-    # end
+    if valid.include?(to)
+      return true
+    elsif all.include?(to)
+      raise " Invalid: move puts you in check. "
+    elsif board[to] && board[to].color == self.color
+      raise " Invalid: you cannot attack your own piece "
+    else
+      raise " Invalid: #{name} cannot move like that. "
+    end
   end
 
   # Filters out moves that would put player in check
   def valid_moves
     moves.reject do |move|
       duped_board = board.dup
-
       equivalent_piece = duped_board[@position]
 
       equivalent_piece.position = move
+      duped_board[move] = equivalent_piece
+      duped_board[@position] = nil
+
       duped_board.in_check?(@color)
     end
-
   end
 
 
   def name
     "#{self.class}".downcase
   end
+
 
 end

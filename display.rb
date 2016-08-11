@@ -9,7 +9,7 @@ class Display
 
   def initialize(board)
     @board = board
-    @cursor_pos = [0, 0]
+    @cursor_pos = [6, 0]
     @selected_square = nil
     @flatiron_squares = [
       [5, 0],
@@ -27,6 +27,7 @@ class Display
   end
 
   # Creates a new array: printable (displayable) version of @board.grid
+
   def build_display_grid
     @board.grid.map.with_index do |row, row_number|
       row.map.with_index do |element, col_number|
@@ -41,6 +42,19 @@ class Display
     end
   end
 
+  # def build_dup_grid(dup_board)
+  #   dup_board.grid.map.with_index do |row, row_number|
+  #     row.map.with_index do |element, col_number|
+  #       if element.nil?
+  #         params = determine_color(row_number, col_number)
+  #         "   ".colorize(params)
+  #       else
+  #         params = determine_color(row_number, col_number)
+  #         element.to_s.colorize(params)
+  #       end
+  #     end
+  #   end
+  # end
 
   def determine_color(row, column)
     if [row, column] == @selected_square
@@ -86,6 +100,17 @@ class Display
       puts "    " + notifications[:winner].colorize({foreground: :cyan, style: :bold})
     end
   end
+
+  # def render_duped(duped)
+  #   duped.each_with_index do |row, idx|
+  #     puts "Dup#{8 - idx} │ #{row.join}"
+  #   end
+  #
+  #   puts "     ────────────────────────"
+  #   puts "      A  B  C  D  E  F  G  H"
+  #   puts ""
+  #
+  # end
 
   def welcome_screen
     system("clear")
