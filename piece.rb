@@ -16,7 +16,7 @@ class Piece
   end
 
   def moves
-    # implemented by subclasses/modules
+    # implemented by subclasses/gmodules
   end
 
 
