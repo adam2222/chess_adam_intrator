@@ -52,9 +52,6 @@ class Game
 
   def run
     display.welcome_screen
-    until display.read_char == "\r"
-      sleep
-    end
 
     until board.checkmate?(@current_player)
       begin
@@ -64,7 +61,7 @@ class Game
         from_piece = board[from]
         to_piece = board[to]
 
-        board.make_move(from, to) if board[from].valid_move?(to)
+        board.make_move(from, to) if from_piece.valid_move?(to)
 
         if player.class == Computer
           computer_notifications(from, from_piece, to, to_piece)
@@ -92,9 +89,8 @@ class Game
   end
 
   def computer_notifications(from, from_piece, to, to_piece)
-
     if to_piece.nil?
-      notifications[:instructions] = " Computer moved #{from_piece.name} from #{ calc_col(from[1])}#{calc_row(from[0])} to #{calc_col(to[1])}#{calc_row(to[0])} "
+      notifications[:instructions] = " Computer moved #{from_piece.name} from #{calc_col(from[1])}#{calc_row(from[0])} to #{calc_col(to[1])}#{calc_row(to[0])} "
     else
       notifications[:instructions] = " Computer attacked #{to_piece.name} with its #{from_piece.name} (#{calc_col(from[1])}#{calc_row(from[0])} to #{calc_col(to[1])}#{calc_row(to[0])}) "
     end

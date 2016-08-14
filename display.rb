@@ -96,6 +96,10 @@ class Display
     puts "    " + "                           ".colorize(background: :cyan) + " ".colorize(background: :light_cyan) + " ".colorize(background: :cyan) + " ".colorize(background: :light_cyan) +  "      ".colorize(background: :cyan)
 
     puts "    " + " Press return to begin    ".colorize(background: :cyan) + " ".colorize(background: :light_cyan) + " ".colorize(background: :cyan) + " ".colorize(background: :light_cyan) + "       ".colorize(background: :cyan)
+
+    until read_char == "\r"
+      sleep
+    end
   end
 
   def reset_notfications
