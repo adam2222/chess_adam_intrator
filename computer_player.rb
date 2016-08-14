@@ -33,11 +33,11 @@ class Computer
   def attack_moves?(pieces)
     color == :white ? opposing_color = :black : opposing_color = :white
 
-    pieces.each do|piece|
+    pieces.each do |piece|
       piece.valid_moves.each do |move|
-        target_piece = board[move]
+        target_piece = @board[move]
 
-        if !target_piece.nil? && target_piece.color == opposing_color
+        if !target_piece.nil?
           from = piece.position
           to = move
           return [from, to]

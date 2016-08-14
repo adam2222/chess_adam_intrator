@@ -61,10 +61,13 @@ class Game
         initial_notifications
         from, to = player.select_move
 
+        from_piece = board[from]
+        to_piece = board[to]
+
         board.make_move(from, to) if board[from].valid_move?(to)
 
         if player.class == Computer
-          computer_notifications(from, to)
+          computer_notifications(from, from_piece, to, to_piece)
         end
 
       rescue StandardError => e
@@ -88,8 +91,13 @@ class Game
     notifications[:alerts] = " Check! " if board.in_check?(@current_player)
   end
 
-  def computer_notifications(from, to)
-    notifications[:instructions] = " Computer moved #{board[to].name} from #{ calc_col(from[1])}#{calc_row(from[0])} to #{calc_col(to[1])}#{calc_row(to[0])} "
+  def computer_notifications(from, from_piece, to, to_piece)
+
+    if to_piece.nil?
+      notifications[:instructions] = " Computer moved #{from_piece.name} from #{ calc_col(from[1])}#{calc_row(from[0])} to #{calc_col(to[1])}#{calc_row(to[0])} "
+    else
+      notifications[:instructions] = " Computer attacked #{to_piece.name} with its #{from_piece.name} (#{calc_col(from[1])}#{calc_row(from[0])} to #{calc_col(to[1])}#{calc_row(to[0])}) "
+    end
 
     display.render
     sleep(2)
