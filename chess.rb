@@ -92,7 +92,7 @@ class Game
     notifications[:instructions] = " Computer moved #{board[to].name} from #{ calc_col(from[1])}#{calc_row(from[0])} to #{calc_col(to[1])}#{calc_row(to[0])} "
 
     display.render
-    sleep(3)
+    sleep(2)
   end
 
   def winner_notification

@@ -8,10 +8,7 @@ class Computer
 
   def select_move
     pieces = select_pieces
-
-    random_number = rand(pieces.count - 1)
-    random_piece = pieces[random_number]
-    moves = random_piece.valid_moves
+    moves = []
 
     while moves.empty?
       random_number = rand(pieces.count - 1)
