@@ -26,7 +26,6 @@ class Display
   end
 
   # Creates a new array: printable (displayable) version of @board.grid
-
   def build_display_grid
     @board.grid.map.with_index do |row, row_number|
       row.map.with_index do |element, col_number|
@@ -39,7 +38,6 @@ class Display
       end
     end
   end
-
 
   def determine_color(row, column)
     if [row, column] == @selected_square

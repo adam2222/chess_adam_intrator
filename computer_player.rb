@@ -40,5 +40,5 @@ class Computer
     end
     pieces
   end
-
+  
 end

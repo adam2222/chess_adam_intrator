@@ -127,7 +127,6 @@ class Game
   def calc_col(col)
     (65 + col).chr
   end
-
 end
 
 ##################################

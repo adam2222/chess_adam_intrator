@@ -19,7 +19,6 @@ class Piece
     # implemented by subclasses/gmodules
   end
 
-
   def valid_move?(to)
     all = moves
     valid = valid_moves
@@ -49,10 +48,7 @@ class Piece
     end
   end
 
-
   def name
     "#{self.class}".downcase
   end
-
-
 end
