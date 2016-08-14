@@ -8,20 +8,9 @@ class Computer
 
   def select_move
     pieces = select_pieces
-    moves = []
+    attack = attack_moves?(pieces)
 
-    while moves.empty?
-      random_number = rand(pieces.count - 1)
-      random_piece = pieces[random_number]
-      moves = random_piece.valid_moves
-    end
-
-    from = random_piece.position
-
-    random_number = rand(moves.count - 1)
-    to = moves[random_number]
-
-    [from, to]
+    attack ? attack : random_move(pieces)
   end
 
   private
@@ -39,6 +28,40 @@ class Computer
       end
     end
     pieces
+  end
+
+  def attack_moves?(pieces)
+    color == :white ? opposing_color = :black : opposing_color = :white
+
+    pieces.each do|piece|
+      piece.valid_moves.each do |move|
+        target_piece = board[move]
+
+        if !target_piece.nil? && target_piece.color == opposing_color
+          from = piece.position
+          to = move
+          return [from, to]
+        end
+      end
+    end
+    false
+  end
+
+  def random_move(pieces)
+    moves = []
+
+    while moves.empty?
+      random_number = rand(pieces.count - 1)
+      random_piece = pieces[random_number]
+      moves = random_piece.valid_moves
+    end
+
+    from = random_piece.position
+
+    random_number = rand(moves.count - 1)
+    to = moves[random_number]
+
+    [from, to]
   end
 
 end
