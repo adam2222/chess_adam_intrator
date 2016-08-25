@@ -48,7 +48,7 @@ class Computer
     end
     false
   end
-  
+
   def attack_move?(pieces)
     pieces.each do |piece|
       piece.valid_moves.each do |move|
@@ -63,7 +63,6 @@ class Computer
     end
     false
   end
-
 
   def random_move(pieces)
     moves = []

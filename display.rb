@@ -10,18 +10,6 @@ class Display
     @board = board
     @cursor_pos = [6, 0]
     @selected_square = nil
-    @flatiron_squares = [
-      [5, 0],
-      [4, 1],
-      [3, 2],
-      [2, 3],
-      [1, 4],
-      [5, 2],
-      [4, 3],
-      [3, 4],
-      [2, 5],
-      [1, 6]
-    ]
     @notifications = {player: nil, instructions: nil, errors: nil}
   end
 
@@ -44,8 +32,6 @@ class Display
       { background: :red }
     elsif [row, column] == @cursor_pos
       { background: :purple }
-    elsif @flatiron_squares.include?([row, column])
-      { background: :cyan }
     elsif (row + column).even?
       { background: :white }
     else
@@ -87,13 +73,15 @@ class Display
     system("clear")
     puts "\n\n"
 
-    puts "    " + " Chess!                      ".colorize(background: :cyan, style: :bold) + " ".colorize(background: :light_cyan) + " ".colorize(background: :cyan) + " ".colorize(background: :light_cyan) + "    ".colorize(background: :cyan)
+    puts "    " + " Chess!                                       ".colorize(background: :cyan, style: :bold)
 
-    puts "    " + " by Adam Intrator, Flatiron ".colorize(background: :cyan) + "h".colorize(background: :light_cyan) + "o".colorize(background: :cyan) + "p".colorize(background: :light_cyan) + "eful ".colorize(background: :cyan)
+    puts "    " + " by Adam Intrator, Fullstack Academy hopeful  ".colorize(background: :cyan)
 
-    puts "    " + "                           ".colorize(background: :cyan) + " ".colorize(background: :light_cyan) + " ".colorize(background: :cyan) + " ".colorize(background: :light_cyan) +  "      ".colorize(background: :cyan)
+    puts "    " + "                                              ".colorize(background: :cyan)
 
-    puts "    " + " Press return to begin    ".colorize(background: :cyan) + " ".colorize(background: :light_cyan) + " ".colorize(background: :cyan) + " ".colorize(background: :light_cyan) + "       ".colorize(background: :cyan)
+    puts "    " + " Press return to begin                        ".colorize(background: :cyan)
+
+    puts "    " + " Increase text size for best experience       ".colorize(background: :cyan)
 
     until read_char == "\r"
       sleep

@@ -29,7 +29,7 @@ require_relative 'computer_player'
 class Game
   attr_accessor :board, :display
 
-  def initialize(player1 = "Adam", player2 = "Flatiron")
+  def initialize(player1 = "Adam", player2 = "Fullstack")
     @board = Board.new
     @display = Display.new(@board)
     determine_players(player1, player2)
@@ -37,10 +37,10 @@ class Game
   end
 
   def determine_players(player1, player2)
-    if player2.downcase == "computer" || player2 == "Flatiron"
+    if player2.downcase == "computer" || player2 == "Fullstack"
       @players = {
         :white => Player.new(player1, :white, @display),
-        :black => Computer.new("Flatiron", :black, @board)
+        :black => Computer.new("Fullstack", :black, @board)
     }
     else
       @players = {
