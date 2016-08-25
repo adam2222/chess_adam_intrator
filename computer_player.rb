@@ -23,7 +23,7 @@ class Computer
         if piece.nil?
           next
         elsif piece.color == color
-          pieces  << piece
+          pieces << piece
         end
       end
     end

@@ -95,6 +95,8 @@ class Game
       notifications[:instructions] = " Computer attacked #{to_piece.name} with its #{from_piece.name} (#{calc_col(from[1])}#{calc_row(from[0])} to #{calc_col(to[1])}#{calc_row(to[0])}) "
     end
 
+    notifications[:alerts] = " Check! " if board.in_check?(from_piece.opposing_color)
+
     display.render
     sleep(2)
   end
