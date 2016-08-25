@@ -8,9 +8,14 @@ class Computer
 
   def select_move
     pieces = select_pieces
-    attack = attack_moves?(pieces)
 
-    attack ? attack : random_move(pieces)
+    check_move = check_move?(pieces)
+    return check_move if check_move
+
+    attack_move = attack_move?(pieces)
+    return attack_move if attack_move
+
+    random_move(pieces)
   end
 
   private
@@ -30,31 +35,35 @@ class Computer
     pieces
   end
 
-  def attack_moves?(pieces)
+  def check_move?(pieces)
+    pieces.each do |piece|
+      piece.valid_moves.each do |move|
+        duped_board = @board.dup
+        from = piece.position
+        to = move
+
+        duped_board.make_move(from, to)
+        return [from, to] if duped_board.in_check?(piece.opposing_color)
+      end
+    end
+    false
+  end
+  
+  def attack_move?(pieces)
     pieces.each do |piece|
       piece.valid_moves.each do |move|
         target_piece = @board[move]
 
-        if move_creates_check?(piece, move)
-          from = piece.position
-          to = move
-          return [from, to]
-        elsif !target_piece.nil?
+        if !target_piece.nil?
           from = piece.position
           to = move
           return [from, to]
         end
-
       end
     end
     false
   end
 
-  def move_creates_check?(piece, move)
-    duped_board = @board.dup
-    duped_board.make_move(piece.position, move)
-    duped_board.in_check?(piece.opposing_color)
-  end
 
   def random_move(pieces)
     moves = []
