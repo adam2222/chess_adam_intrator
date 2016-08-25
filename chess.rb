@@ -67,10 +67,10 @@ class Game
           computer_notifications(from, from_piece, to, to_piece)
         end
 
-      rescue StandardError => e
-        display.reset_notfications
-        notifications[:alerts] = e.message
-        retry
+      # rescue StandardError => e
+      #   display.reset_notfications
+      #   notifications[:alerts] = e.message
+      #   retry
       end
 
       switch_players

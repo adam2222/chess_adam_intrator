@@ -16,7 +16,7 @@ class Piece
   end
 
   def moves
-    # implemented by subclasses/gmodules
+    # implemented by subclasses/modules
   end
 
   def valid_move?(to)
@@ -46,6 +46,10 @@ class Piece
 
       duped_board.in_check?(@color)
     end
+  end
+
+  def opposing_color
+    color == :white ? :black : :white
   end
 
   def name

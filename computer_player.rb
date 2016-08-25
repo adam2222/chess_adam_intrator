@@ -31,20 +31,29 @@ class Computer
   end
 
   def attack_moves?(pieces)
-    color == :white ? opposing_color = :black : opposing_color = :white
-
     pieces.each do |piece|
       piece.valid_moves.each do |move|
         target_piece = @board[move]
 
-        if !target_piece.nil?
+        if move_creates_check?(piece, move)
+          from = piece.position
+          to = move
+          return [from, to]
+        elsif !target_piece.nil?
           from = piece.position
           to = move
           return [from, to]
         end
+
       end
     end
     false
+  end
+
+  def move_creates_check?(piece, move)
+    duped_board = @board.dup
+    duped_board.make_move(piece.position, move)
+    duped_board.in_check?(piece.opposing_color)
   end
 
   def random_move(pieces)

@@ -44,6 +44,20 @@ class Board
     any_pieces_check?(opposing_color, king_position)
   end
 
+  def dup
+    dup_grid = Array.new(8) { Array.new(8) }
+    dup_board = Board.new(dup_grid)
+
+    grid.each_with_index do |row, y|
+      row.each_with_index do |piece, x|
+        next if piece.nil?
+        dup_board[[y, x]] = piece.class.new(piece.color, piece.position, dup_board)
+      end
+    end
+    dup_board
+  end
+
+  private
 
   def find_king(color)
     grid.each do |row|
@@ -70,19 +84,6 @@ class Board
     false
   end
 
-  def dup
-    dup_grid = Array.new(8) { Array.new(8) }
-    dup_board = Board.new(dup_grid)
-
-    grid.each_with_index do |row, y|
-      row.each_with_index do |piece, x|
-        next if piece.nil?
-        dup_board[[y, x]] = piece.class.new(piece.color, piece.position, dup_board)
-      end
-    end
-    dup_board
-  end
-
   def calc_row(row)
     8 - row
   end
@@ -90,8 +91,6 @@ class Board
   def calc_col(col)
     (65 + col).chr
   end
-
-  private
 
   def new_board
     grid = Array.new(8) { Array.new(8) }
